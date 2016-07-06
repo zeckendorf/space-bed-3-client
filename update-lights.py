@@ -39,7 +39,7 @@ def main():
             time.sleep(SLEEP_TIME)
             new_color = get_current_color()
             
-            if new_color is not current_color:
+            if new_color != current_color:
                 current_color = new_color
                 print 'Setting color to: ' + current_color
                 msg   = SENTINAL_BEGIN + current_color + SENTINAL_END
