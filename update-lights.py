@@ -39,7 +39,7 @@ def main():
             color = get_current_color()
             print 'Setting color to: ' + color
             msg   = SENTINAL_BEGIN + color + SENTINAL_END
-            ser.write(msg)
+            ser.write(msg.encode())
     except KeyboardInterrupt:
         print 'Detected keyboard escape! Gracefully closing...'
         sys.exit(1)
