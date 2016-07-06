@@ -24,6 +24,7 @@ current_color = 'OFF'
 
 def main():
     
+    global current_color
     ser = ''
     try:
         ser = serial.Serial('/dev/ttyUSB0', 9600, timeout=1)
@@ -36,10 +37,12 @@ def main():
     try:
         while True:
             time.sleep(SLEEP_TIME)
-            color = get_current_color()
-            print 'Setting color to: ' + color
-            msg   = SENTINAL_BEGIN + color + SENTINAL_END
-            ser.write(msg.encode())
+            new_color = get_current_color()
+            
+            if new_color is not current_color:
+                print 'Setting color to: ' + color
+                msg   = SENTINAL_BEGIN + color + SENTINAL_END
+                ser.write(msg.encode())
     except KeyboardInterrupt:
         print 'Detected keyboard escape! Gracefully closing...'
         sys.exit(1)
