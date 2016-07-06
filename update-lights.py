@@ -40,9 +40,9 @@ def main():
             new_color = get_current_color()
             
             if new_color is not current_color:
-                color = new_color
-                print 'Setting color to: ' + color
-                msg   = SENTINAL_BEGIN + color + SENTINAL_END
+                current_color = new_color
+                print 'Setting color to: ' + current_color
+                msg   = SENTINAL_BEGIN + current_color + SENTINAL_END
                 ser.write(msg.encode())
     except KeyboardInterrupt:
         print 'Detected keyboard escape! Gracefully closing...'
