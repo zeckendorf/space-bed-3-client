@@ -17,7 +17,7 @@ import sys
 SENTINAL_BEGIN  = b'^'
 SENTINAL_END    = b'$'
 SERVER_ENDPOINT = 'http://space-bed-gcloud.appspot.com/current_color' 
-SLEEP_TIME      = .25
+SLEEP_TIME      = .5
 
 # globals
 current_color = 'OFF'
@@ -30,11 +30,12 @@ def main():
         ser = serial.Serial('/dev/ttyUSB0', 9600, timeout=1)
         ser.close()
         ser.open()
+        time.sleep(2)
         print 'serial port is connected'
     except Exception as e:
         print 'Failed to connect to serial device'
-
-    print 'set up requests'
+    
+    sys.stdout.flush()
 
     # main loop (escape on keyboard interrupt)
     try:
@@ -43,10 +44,13 @@ def main():
             new_color = get_current_color()
             
             if new_color != current_color:
-                current_color = new_color
                 print 'Setting color to:' + current_color +'!'
+                sys.stdout.flush()
                 msg   = SENTINAL_BEGIN + current_color + SENTINAL_END
-                ser.write(msg)
+                ser.write(msg.encode())
+                time.sleep(SLEEP_TIME)
+                current_color = new_color
+
     except KeyboardInterrupt:
         print 'Detected keyboard escape! Gracefully closing...'
         sys.exit(1)

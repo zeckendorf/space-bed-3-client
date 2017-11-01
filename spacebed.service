@@ -4,8 +4,11 @@ After=multi-user.target
  
 [Service]
 Type=simple
-ExecStart=/usr/bin/python /home/pi/update-lights.py
-Restart=on-abort
+ExecStart=/usr/bin/python /home/pi/space-bed-3-client/update-lights.py
+Restart=always
+RestartSec=1
+StandardOutput=journal
+StandardError=journal
  
 [Install]
 WantedBy=multi-user.target
