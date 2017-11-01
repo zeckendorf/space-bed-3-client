@@ -44,9 +44,9 @@ def main():
             new_color = get_current_color()
             
             if new_color != current_color:
-                print 'Setting color to:' + current_color +'!'
+                print 'Setting color to:' + new_color +'!'
                 sys.stdout.flush()
-                msg   = SENTINAL_BEGIN + current_color + SENTINAL_END
+                msg   = SENTINAL_BEGIN + new_color + SENTINAL_END
                 ser.write(msg.encode())
                 time.sleep(SLEEP_TIME)
                 current_color = new_color
